@@ -20,7 +20,7 @@ const VoiceAssistant = () => {
   const [characterState, setCharacterState] = useState("normal");
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:3001");
+    socketRef.current = io("https://ai-assistant-tepe.onrender.com");
     socketRef.current.on("response", (message) => {
       setResponse(message);
       setCharacterState(message.includes("and") ? "talk" : message.includes("sad") ? "sad" : "normal");
@@ -30,7 +30,7 @@ const VoiceAssistant = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/ask/prompt", { prompt });
+      const response = await axios.post("https://ai-assistant-tepe.onrender.com/ask/prompt", { prompt });
       setMessage(response.data.message);
       setPrompt("");
     } catch (error) {
